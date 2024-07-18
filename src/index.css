@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, body, :root{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.itim-regular {
+    font-family: "Itim", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: "Itim";
+  src: url("Itim-Regular.ttf") format("ttf");
+  font-style: normal;
+  font-display: swap;
+  font-weight: 40;
+}
