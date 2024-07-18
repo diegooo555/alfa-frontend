@@ -24,7 +24,7 @@ interface TaskContextType {
         dateend: string;
     }[]>>,
     getTasks: () => Promise <void>,
-    createTask: (task: Task) => Promise<void>,
+    createTask: (task: FieldValues) => Promise<void>,
     updateTask: (id: number, task: FieldValues) => Promise<void>,
     deleteTask: (id: number) => Promise<void>,
 }
@@ -52,7 +52,7 @@ export const TaskProvider = ({children}: ChildrenProps) => {
         }
     }
 
-    const createTask = async (task: Task) => {
+    const createTask = async (task: FieldValues) => {
         try {
             const res = await createTaskRequest(task)
             console.log(res)

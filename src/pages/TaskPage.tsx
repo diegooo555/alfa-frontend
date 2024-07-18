@@ -2,7 +2,7 @@ import Calendar from "../components/Calendar";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../context/UserContext";
 import { TaskContext } from "../context/TaskContext";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
 function TaskPage() {
@@ -18,7 +18,7 @@ function TaskPage() {
 
   const tasks = taskContext?.tasks
 
-  const onSubmit = handleSubmit(async (data) => {
+  const onSubmit = handleSubmit(async (data: FieldValues) => {
     createTask ? createTask(data) : console.log("Create Task Function Undefined")
   })
 
