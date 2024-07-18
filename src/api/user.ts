@@ -1,17 +1,9 @@
+import { FieldValues } from "react-hook-form";
 import axios from "./axiosInstance";
 
-interface UserRegister {
-    name: string;
-    email: string;
-    password: string;
-}
 
-interface UserLogin {
-    email: string;
-    password: string;
-}
 
-export const registerRequest = async (user: UserRegister) => {
+export const registerRequest = async (user: FieldValues) => {
     try {
         const response = await axios.post("/register", user);
         return response.data; // Retorna los datos que te devuelva el backend, si es necesario
@@ -20,7 +12,7 @@ export const registerRequest = async (user: UserRegister) => {
     }
 };
 
-export const loginUser = async (user: UserLogin) => {
+export const loginUser = async (user: FieldValues) => {
     try {
         const response = await axios.post("/login", user);
         return response.data; // Retorna los datos que te devuelva el backend, si es necesario

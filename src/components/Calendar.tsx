@@ -41,7 +41,13 @@ interface ColumnDayProps {
   tasks: Task[];
   setTaskModal: React.Dispatch<React.SetStateAction<{
     state: boolean;
-    task: null;
+    task: {
+        id: number;
+        title: string;
+        description: string;
+        datestart: string;
+        dateend: string;
+    };
 }>>;
 }
 
@@ -215,6 +221,7 @@ const ColumnHours = () => (
 
 const RowHour = (props: RowHourProps) => {
   /* const {hourStart, amPm, hourEnd, amPmEnd, day, month, year} = props; */
+  console.log(props)
   return (
     <div className="border-solid border border-blue-300 hover:bg-blue-100"></div>
   );
@@ -293,7 +300,7 @@ const formatHourMeridian = (dateActual: Date) => {
 
 export function Calendar(props: CalendarProps) {
   const { tasks } = props;
-  const [taskModal, setTaskModal] = useState({ state: false, task: null });
+  const [taskModal, setTaskModal] = useState({ state: false, task: {id: 0, title: "", description: "", datestart: "", dateend: ""} });
   const scrollableRef = useRef<HTMLDivElement | null>(null);
   const dateNow = new Date();
   const currentDay = dateNow.getDate();
@@ -301,10 +308,9 @@ export function Calendar(props: CalendarProps) {
   const currentYear = dateNow.getFullYear();
   const dayStr = days[dateNow.getDay()];
   const formatMeridian = formatHourMeridian(dateNow);
-
   const taskContext = useContext(TaskContext)
-  const deleteTask = taskContext?.deleteTask
-  const updateTask = taskContext?.updateTask
+  const deleteTask = taskContext? taskContext.deleteTask : async () => {}
+  const updateTask = taskContext? taskContext.updateTask : async () => {}
 
   const arrDaysWeek = generateDaysWeek(
     currentDay,

@@ -1,5 +1,6 @@
 import { useState, createContext, ReactNode } from "react";
 import { createTaskRequest, getTasksRequest, deleteTaskRequest, updateTaskRequest } from "../api/task";
+import { FieldValues } from "react-hook-form";
 
 interface Task{
     id: number,
@@ -24,7 +25,7 @@ interface TaskContextType {
     }[]>>,
     getTasks: () => Promise <void>,
     createTask: (task: Task) => Promise<void>,
-    updateTask: (id: number, task: Task) => Promise<void>,
+    updateTask: (id: number, task: FieldValues) => Promise<void>,
     deleteTask: (id: number) => Promise<void>,
 }
 
@@ -61,7 +62,7 @@ export const TaskProvider = ({children}: ChildrenProps) => {
         }
     }
 
-    const updateTask = async (id: number | string, task: Task) => {
+    const updateTask = async (id: number, task: FieldValues) => {
         try {
             const res = await updateTaskRequest(id, task)
             await getTasks()
@@ -71,7 +72,7 @@ export const TaskProvider = ({children}: ChildrenProps) => {
         }
     }
 
-    const deleteTask = async (id: number | string) => {
+    const deleteTask = async (id: number) => {
         const res = await deleteTaskRequest(id)
         if(res.status === 204) setTasks(tasks.filter( taskActual => taskActual.id !== id))
     }

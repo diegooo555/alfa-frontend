@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { AuthContext } from "../context/UserContext"
 import { useContext, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
@@ -26,7 +26,7 @@ function Register() {
     console.log(user)
     console.log(isAuthenticated)
 
-    const onSubmit = handleSubmit(async (values) => {
+    const onSubmit = handleSubmit(async (values: FieldValues) => {
         signup ? signup(values) : console.log("Function signup error")
     })
 

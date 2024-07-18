@@ -23,7 +23,13 @@ interface ModalTask {
   taskModal: StateModalTask;
   setTaskModal: React.Dispatch<React.SetStateAction<{
     state: boolean;
-    task: null;
+    task: {
+        id: number;
+        title: string;
+        description: string;
+        datestart: string;
+        dateend: string;
+    };
 }>>;
   updateTask: (id: number, task: FieldValues) => Promise<void> ;
   deleteTask: (id: number) => Promise<void>;
@@ -61,15 +67,15 @@ const ModalTask = (props: ModalTask) => {
         console.log(data)
         if (task) {
           props.updateTask(task.id, data)
-          props.setTaskModal({state: false, task: null})
+          props.setTaskModal({state: false, task: {id: 0, title: "", description: "", datestart: "", dateend: ""}})
         }
     })
 
     return(
-        <div className="w-screen h-screen grid fixed top-0 left-0" onClick={() => props.setTaskModal({state: false, task: null})}>
+        <div className="w-screen h-screen grid fixed top-0 left-0" onClick={() => props.setTaskModal({state: false, task: {id: 0, title: "", description: "", datestart: "", dateend: ""}})}>
         <form className='justify-self-center self-center w-[45%] h-[80%] bg-white shadow-2xl
          flex flex-col gap-2 dark:border rounded-md p-5' onClick={(e) => e.stopPropagation()} onSubmit={onSubmit}>
-            <button className='self-end bg-gray-400 rounded-full w-8 h-8 flex justify-center items-center hover:bg-gray-300' onClick={() => props.setTaskModal({state: false, task: null})} >
+            <button className='self-end bg-gray-400 rounded-full w-8 h-8 flex justify-center items-center hover:bg-gray-300' onClick={() => props.setTaskModal({state: false, task: {id: 0, title: "", description: "", datestart: "", dateend: ""}})} >
                 <svg focusable="false" width="20" height="20" viewBox="0 0 24 24">
                     <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path>
                 </svg>

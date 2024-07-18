@@ -1,20 +1,10 @@
 import { useState, useEffect, ReactNode, createContext } from "react";
 import { registerRequest, loginUser, verifyTokenRequest } from "../api/user";
 import Cookies from 'js-cookie';
+import { FieldValues } from "react-hook-form";
 
 interface ChildrenProps {
     children: ReactNode;
-}
-
-interface UserRegister {
-    name: string,
-    email: string,
-    password: string,
-}
-
-interface UserLogin {
-    email: string,
-    password: string,
 }
 
 interface AuthUser {
@@ -31,8 +21,8 @@ interface UserContextType {
     isAuthenticated: boolean,
     setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>,
     loading: boolean,
-    signup: (user: UserRegister) => Promise<void>,
-    signin: (user: UserLogin) => Promise<void>,
+    signup: (user: FieldValues) => Promise<void>,
+    signin: (user: FieldValues) => Promise<void>,
     logOut: () => void,
 }
 
@@ -47,7 +37,7 @@ export const AuthProvider = ({ children }: ChildrenProps) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [loading, setLoading] = useState(true)
 
-    const signup = async (user: UserRegister): Promise<void> => {
+    const signup = async (user: FieldValues): Promise<void> => {
 
         try {
             const res = await registerRequest(user)
@@ -58,7 +48,7 @@ export const AuthProvider = ({ children }: ChildrenProps) => {
         }
     }
 
-    const signin = async (user: UserLogin): Promise<void> => {
+    const signin = async (user: FieldValues): Promise<void> => {
         try {
             const res = await loginUser(user)
             setUser(res)
