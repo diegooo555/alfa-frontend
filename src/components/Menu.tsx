@@ -17,8 +17,8 @@ function MenuTaskPage(){
                 <img src="/wolf.png" alt="logo Alfa" width="100px" height="100px"/>
             </a>
 
-            <Link href="./" content="INICIO"/>
-            <Link href="./tasks" content="TASKS"/>
+            <Link href="/#" content="INICIO"/>
+            <Link href="/#/tasks" content="TASKS"/>
             <Link href="./" content="FINANCE"/>
             <Link href="./" content="COMPANYS"/>
             <Link href="./" content="PROJECTS"/>
