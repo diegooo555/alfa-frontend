@@ -1,1 +1,1 @@
-export const REACT_APP_URL = "http://localhost:4000";
+export const REACT_APP_URL = "https://alfa-backend-i2ct.onrender.com";
